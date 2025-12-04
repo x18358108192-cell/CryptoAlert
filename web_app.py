@@ -14,7 +14,7 @@ import os
 # !!! 请替换为你的真实 QQ 邮箱信息和授权码 !!!
 # ==================================================
 # 注意：线上部署时，最好使用环境变量读取这些信息，这里为了测试方便，直接写出。
-SENDER_EMAIL = 'xzhihu507@gmail.com'      
+SENDER_EMAIL = 'zhihu507@gmail.com'      
 SMTP_SERVER = 'smtp.gmail.com'              
 SMTP_PORT = 465                          
 SMTP_PASSWORD = 'thelrccgzcmxnmxu'         
