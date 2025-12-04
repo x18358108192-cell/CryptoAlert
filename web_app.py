@@ -83,7 +83,7 @@ def send_email_alert(recipient_email, current_price, target_price):
 #                 价格检查功能 (从 scheduler.py 迁移)
 # ==================================================
 
-ddef check_prices():
+def check_prices():
     """从 Coinbase API 获取价格并检查所有警报。"""
     
     # 🎯 切换到 Coinbase Pro 免费公共 API 🎯
