@@ -23,10 +23,9 @@ SMTP_PASSWORD = 'thelrccgzcmxnmxu'
 
 app = Flask(__name__)
 
-# Render 部署时，SQLite 数据库路径必须放在项目的根目录或 /tmp 目录下
-# 否则，每次部署数据库会被重置。
-# 为了保持本地测试和部署兼容，我们依然使用 instance/alerts.db，但需注意 Render 重置问题。
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///alerts.db'
+# PostgreSQL 配置 (使用环境变量读取)
+# Render 的内部链接格式是 postgres://，但 SQLAlchemy 需要 postgresql://
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("postgres://", "postgresql://")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
