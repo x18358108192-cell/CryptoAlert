@@ -84,12 +84,41 @@ def send_email_alert(recipient_email, current_price, target_price):
 # ==================================================
 
 def check_prices():
+    """从币安API获取价格并检查所有警报。"""
+    
+    # 🎯 切换到 Binance 免费公共 API 🎯
+    url = "https://api.binance.com/api/v3/ticker/price"
+    params = {'symbol': 'BTCUSDT'}
+
+    try:
+        response = requests.get(url, params=params, timeout=10)
+        response.raise_for_status() 
+        data = response.json()
+        
+        # 币安返回的 JSON 结构: {"symbol": "BTCUSDT", "price": "60000.00"}
+        # 我们需要从字符串转换为浮点数
+        current_price = float(data['price'])
+        
+        # 格式化价格，用于日志输出和比较
+        formatted_price = f"${current_price:,.0f}"
+        print(f"当前价格获取成功: {formatted_price}")
+
+    except requests.exceptions.RequestException as e:
+        print(f"⚠️ 网络请求失败，跳过本次检查。错误: {e}")
+        return # 如果获取失败，则退出函数，不进行检查
+
+    # 🚨 警报检查逻辑 (保持不变)
+    # ... (这里是原有的从数据库查询警报、比较价格和发送邮件的代码)
+    
+    # 确保在检查逻辑中，你用来比较价格的变量是 current_price
+    
+    # ...
     """获取当前价格，检查所有用户警报，并发送邮件。"""
     print(f"\n[{time.strftime('%Y-%m-%d %H:%M:%S')}] 任务开始：检查所有用户警报...")
     
     # 1. 获取当前比特币价格
     try:
-        url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
+        url = "https://api.binance.com/api/v3/ticker/price"
         response = requests.get(url)
         response.raise_for_status() 
         data = response.json()
