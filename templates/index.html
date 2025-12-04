@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>加密货币价格警报工具</title>
+</head>
+<body>
+    <h1>设置您的价格警报</h1>
+    <form method="POST">
+        <label for="email">邮箱地址:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="price">比特币目标价格 (USD):</label>
+        <input type="number" id="price" name="price" step="0.01" required><br><br>
+        
+        <input type="submit" value="设置警报">
+    </form>
+
+    <hr>
+    <p>当前数据库中的警报数量: </p>
+</body>
+</html>
